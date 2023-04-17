@@ -1,14 +1,17 @@
 # save as sd-image.nix somewhere
-{ ... }: {
+{ pkgs, ... }: {
   # nixpkgs.crossSystem.system = "aarch64-linux";
-  imports = [
-    <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
-  ];
+  # imports = [
+  #   <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
+  # ];
+
+  # Do not compress the image as we want to use it straight away
+  # sdImage.compressImage = false;
 
   time.timeZone = "NZ";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  sdImage.compressImage = false;
+  # sdImage.compressImage = false;
 
   system = {
     stateVersion = "22.05";
@@ -17,19 +20,21 @@
   nixpkgs.config.allowUnfree = true;
   hardware.opengl.enable = true;
 
-  boot.loader.raspberryPi = {
-    enable = true;
-    version = 3;
-    firmwareConfig = ''
-      core_freq=250
-    '';
-  };
+  # boot.loader.raspberryPi = {
+  #   enable = true;
+  #   version = 3;
+  #   firmwareConfig = ''
+  #     core_freq=250
+  #   '';
+  # };
 
   services.openssh = {
     enable = true;
     # require public key authentication for better security
-    passwordAuthentication = false;
-    kbdInteractiveAuthentication = false;
+    settings = {
+      passwordAuthentication = false;
+      kbdInteractiveAuthentication = false;
+    };
   };
 
   # put your own configuration here, for example ssh keys:
@@ -38,10 +43,9 @@
   ];
 
   users.users.edeetee = {
-  isNormalUser = true;
-  extraGroups = [ "wheel" "video" ]; # Enable ‘sudo’ for the user.
-  packages = with pkgs; [];
-
+    isNormalUser = true;
+    extraGroups = [ "wheel" "video" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [];
   };
 
   environment.systemPackages = with pkgs; [
@@ -59,8 +63,8 @@
   services.xserver.displayManager.gdm.autoSuspend = false;  
 
   hardware.enableRedistributableFirmware = true;
-  networking.wireless.enable = true;
 
+  networking.wireless.enable = false;
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   networking.hostName = "nixos-rpi3b";
 }
