@@ -37,15 +37,15 @@
     };
   };
 
-  # put your own configuration here, for example ssh keys:
-  users.users.edeetee.openssh.authorizedKeys.keys = [
-     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCfIZH1o0ayWQGxhzJONFGTWTN1Gzw7G3ONHlELaYPgvjthQSIwpIsfa/YU/eS+guWE4NJJqOrY9M9O8VpDFq2eSTUssM9IFS3aXhU6V7dI7ywzdBNncsXMoJNBfakmqUtPU2eltIpANR/pjzxsJQ7cnuCeEvCTChjxvBQPFy3pcYdELaVKHm8w6tJ+fyR7wms69bbypubQIcIHUqfnrLo6DsHdDQaWBgo207bRY1Q1MoJEtTghu3HAgmslcWI23uMo4voJ7F7NXwGsNzvH9KckBzGHBDL3t/cwtNQm4xa0kvvEOAwJAdy+bnp0lnlqN6B5Hyy7zRdPuAlkSnqnEl1CqOZ1f9lvnC+gRjv/QO0F01DFGuTfhp/0GFjn1plsRie45eOtfcxB2JeVwZoTZXIjr/iM04WURgJJPvm/RyoBjp1NLcZDUunBon+L6CWVfCk8Qntlo6pXI9PdHtXoAQQTexB1rPPzGkpWZ6MffNfzpFIZ/ZsHGmyaloA9i9ALEGU= edwardtaylor@edwards-mbp.lan"
-  ];
-
   users.users.edeetee = {
     isNormalUser = true;
     extraGroups = [ "wheel" "video" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [];
+    hashedPassword = "$6$AjTKt5jTQMbkhLOb$hI6918AjvtwtQoVM.XgFgDjClQ4cq8.15VaomXexbRr5ZIwJb8tmlJCkxd8gW.DMyMjSb.ojthahBSr1IQQjJ/";
+
+    openssh.authorizedKeys.keys = [
+     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCfIZH1o0ayWQGxhzJONFGTWTN1Gzw7G3ONHlELaYPgvjthQSIwpIsfa/YU/eS+guWE4NJJqOrY9M9O8VpDFq2eSTUssM9IFS3aXhU6V7dI7ywzdBNncsXMoJNBfakmqUtPU2eltIpANR/pjzxsJQ7cnuCeEvCTChjxvBQPFy3pcYdELaVKHm8w6tJ+fyR7wms69bbypubQIcIHUqfnrLo6DsHdDQaWBgo207bRY1Q1MoJEtTghu3HAgmslcWI23uMo4voJ7F7NXwGsNzvH9KckBzGHBDL3t/cwtNQm4xa0kvvEOAwJAdy+bnp0lnlqN6B5Hyy7zRdPuAlkSnqnEl1CqOZ1f9lvnC+gRjv/QO0F01DFGuTfhp/0GFjn1plsRie45eOtfcxB2JeVwZoTZXIjr/iM04WURgJJPvm/RyoBjp1NLcZDUunBon+L6CWVfCk8Qntlo6pXI9PdHtXoAQQTexB1rPPzGkpWZ6MffNfzpFIZ/ZsHGmyaloA9i9ALEGU= edwardtaylor@edwards-mbp.lan"
+    ];
   };
 
   environment.systemPackages = with pkgs; [
